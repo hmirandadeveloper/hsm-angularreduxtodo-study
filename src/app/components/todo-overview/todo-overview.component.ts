@@ -1,0 +1,24 @@
+import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { IAppState } from '../../store';
+import { ETodoActions } from '../../actions';
+
+@Component({
+  selector: 'app-todo-overview',
+  templateUrl: './todo-overview.component.html',
+  styleUrls: ['./todo-overview.component.scss']
+})
+export class TodoOverviewComponent implements OnInit {
+
+  @select() todos;
+  @select() lastUpdate;
+
+  constructor(private ngRedux: NgRedux<IAppState>) { }
+
+  ngOnInit() {
+  }
+
+  removeAllTodos() {
+    this.ngRedux.dispatch({type: ETodoActions.REMOVE_ALL})
+  }
+}

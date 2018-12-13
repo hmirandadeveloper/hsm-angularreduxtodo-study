@@ -16,17 +16,19 @@ export const INITIAL_STATE: IAppState = {
 export function rootReducer(state, action) {
     switch(action.type) {
         case ETodoActions.ADD:
-            action.todo.id = state.todos.lenght + 1;
+            console.log(ETodoActions.ADD);
+            action.todo.id = state.todos.length + 1;
             return Object.assign({}, state, {
                 todos: state.todos.concat(Object.assign({}, action.todo)),
                 lastUpdate: new Date()
             });
             
         case ETodoActions.TOGGLE:
-            var todo: ITodo = state.todos.find(todo => todo.id === action.id);
+            console.log(ETodoActions.TOGGLE);
+            var todo: ITodo = state.todos.find(td => td.id === action.id);
             var index: number = state.todos.indexOf(todo);
             return Object.assign({}, state, {
-                todo: [
+                todos: [
                     ...state.todos.slice(0, index),
                     Object.assign({}, todo, {isCompleted: !todo.isCompleted}),
                     ...state.todos.slice(index + 1)
@@ -34,6 +36,7 @@ export function rootReducer(state, action) {
                 lastUpdate: new Date()
             });
         case ETodoActions.REMOVE:
+            console.log(ETodoActions.REMOVE);
             return Object.assign({}, state, {
                 todos: state.todos.filter(todo => todo.id !== action.id),
                 lastUpdate: new Date()
